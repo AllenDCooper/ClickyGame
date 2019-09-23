@@ -23,7 +23,7 @@ export function CardList({ children }) {
         backgroundSize: "cover",
         backgroundImage: "url(" + props.src + ")"
       }
-    return <div style={styleImg} onClick={props.handleClickFunction} id={props.id} key={props.id}>
+    return <div style={styleImg} onClick={props.handleClickFunction} data-value={props.id} key={props.id}>
       </div>
   }
 

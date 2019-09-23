@@ -7,6 +7,8 @@ class CardContainer extends Component {
     state = {
         guessedArr: [],
         topScore: 0,
+        curScore: 0,
+        curAnswerResponse: "",
         curCardArr: [
             {id: 1, src: "/assets/images/photo1.jpg"},
             {id: 2, src: "/assets/images/photo2.jpg"},
@@ -27,6 +29,7 @@ class CardContainer extends Component {
         this.renderCards(this.state.curCardArr);
         console.log(this.state);
     }
+
     renderCards = (cardArr) => {
         this.setState(
             {curCardArr: this.shuffleArray(cardArr)}
@@ -43,21 +46,35 @@ class CardContainer extends Component {
         return array
     };
 
-
+    // click listener that increases 
     handleClick = event => {
-        let clickedKey = event.target.getAttribute("id")
-        this.state.guessedArr.push(parseInt(clickedKey));
-        console.log(this.state.guessedArr);
-    }
+        let clickedKey = parseInt(event.target.getAttribute("data-value"));
+        this.state.guessedArr.forEach( element => {
+            if (clickedKey === element) {
+                this.setState = {
+                    curAnswerResponse: "You guessed incorrectly!"
+                }
+                return this.restartGame()
+            }
+        });
+        this.state.guessedArr.push(clickedKey);
+        console.log(this.state);
+        let newScore = this.state.curScore + clickedKey
+        console.log(newScore)
+        this.setState({
+            curAnswerResponse: "You guess correctly!",
+            curScore: newScore
+        });
+    };
 
     render() {
         return (
             <div>
-                <Header />
+                <Header key={this.state.curAnswerResponse} score={this.state.curScore} answerResponse={this.state.curAnswerResponse}/>
                 <Title />
                 <CardList>
                     {this.state.curCardArr.map(card => (
-                        <CardListItem id={card.id} src={card.src} handleClickFunction={this.handleClick}/>
+                        <CardListItem id={card.id} src={card.src} key={card.id} handleClickFunction={this.handleClick}/>
                         )
                     )}
                 </CardList>
