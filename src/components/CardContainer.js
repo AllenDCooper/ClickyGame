@@ -28,10 +28,19 @@ class CardContainer extends Component {
         console.log(this.state);
     }
     renderCards = (cardArr) => {
-        // add code to randomly shuffle cardArr
         this.setState(
-            {curCardArr: cardArr}
+            {curCardArr: this.shuffleArray(cardArr)}
         )
+    };
+    // Fisher-Yates shuffle: takes a random element from the entire array, puts it as the final spot in the array, and then repeats on the array minus the final spot, and so on until the first element in the array is set. 
+    shuffleArray = (array) => {
+        for (var i = array.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        };
+        return array
     };
 
     render() {
