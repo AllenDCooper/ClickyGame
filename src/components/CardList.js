@@ -23,8 +23,7 @@ export function CardList({ children }) {
         backgroundSize: "cover",
         backgroundImage: "url(" + props.src + ")"
       }
-    return <div style={styleImg}>
-        {/* <img src={props.src} key={props.key} className="card-img-top img-fluid" alt="..."/> */}
+    return <div style={styleImg} onClick={props.handleClickFunction} id={props.id} key={props.id}>
       </div>
   }
 

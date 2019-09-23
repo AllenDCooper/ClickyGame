@@ -43,6 +43,13 @@ class CardContainer extends Component {
         return array
     };
 
+
+    handleClick = event => {
+        let clickedKey = event.target.getAttribute("id")
+        this.state.guessedArr.push(parseInt(clickedKey));
+        console.log(this.state.guessedArr);
+    }
+
     render() {
         return (
             <div>
@@ -50,7 +57,7 @@ class CardContainer extends Component {
                 <Title />
                 <CardList>
                     {this.state.curCardArr.map(card => (
-                        <CardListItem key={card.id} src={card.src} />
+                        <CardListItem id={card.id} src={card.src} handleClickFunction={this.handleClick}/>
                         )
                     )}
                 </CardList>
