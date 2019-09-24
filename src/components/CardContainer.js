@@ -34,7 +34,8 @@ class CardContainer extends Component {
         this.setState(
             {curCardArr: this.shuffleArray(cardArr)}
         )
-    };
+    }
+
     // Fisher-Yates shuffle: takes a random element from the entire array, puts it as the final spot in the array, and then repeats on the array minus the final spot, and so on until the first element in the array is set. 
     shuffleArray = (array) => {
         for (var i = array.length - 1; i > 0; i--) {
@@ -48,29 +49,47 @@ class CardContainer extends Component {
 
     // click listener that increases 
     handleClick = event => {
+        let gameOver = false; 
         let clickedKey = parseInt(event.target.getAttribute("data-value"));
         this.state.guessedArr.forEach( element => {
             if (clickedKey === element) {
-                this.setState = {
-                    curAnswerResponse: "You guessed incorrectly!"
-                }
+                gameOver = true;
                 return this.restartGame()
             }
         });
-        this.state.guessedArr.push(clickedKey);
-        console.log(this.state);
-        let newScore = this.state.curScore + clickedKey
-        console.log(newScore)
+        if (gameOver === false) {
+            this.state.guessedArr.push(clickedKey);
+            console.log(this.state);
+            let newScore = this.state.curScore + clickedKey
+            console.log(newScore)
+            this.setState({
+                curAnswerResponse: "You guess correctly!",
+                curScore: newScore
+            });
+        };
+    }
+
+    restartGame = () =>  {
+        console.log("restart game")
+
+        if(this.state.curScore > this.state.topScore) {
+            this.setState({
+                topScore: this.state.curScore
+            });
+        };
         this.setState({
-            curAnswerResponse: "You guess correctly!",
-            curScore: newScore
+            guessedArr: [],
+            curScore: 0,
+            curAnswerResponse: "You guessed incorrectly"
         });
-    };
+        this.renderCards(this.state.curCardArr);
+        console.log(this.state);
+    }
 
     render() {
         return (
             <div>
-                <Header key={this.state.curAnswerResponse} score={this.state.curScore} answerResponse={this.state.curAnswerResponse}/>
+                <Header key={this.state.curAnswerResponse} score={this.state.curScore} answerResponse={this.state.curAnswerResponse} topScore={this.state.topScore} />
                 <Title />
                 <CardList>
                     {this.state.curCardArr.map(card => (

@@ -12,12 +12,13 @@ class Header extends Component {
             score: this.props.score
         })
     }
-    
+
     componentDidUpdate(prevProps) {
         // Typical usage (don't forget to compare props):
         if (this.props.score !== prevProps.score) {
           this.setState({
-              score: this.props.score
+              score: this.props.score,
+              answerResponse: this.props.answerResponse
           })
         }
       }
@@ -30,7 +31,7 @@ class Header extends Component {
                     {this.state.answerResponse}
                 </span>
                 <span className="navbar-text">
-                    {this.state.score}
+                    Score: {this.state.score} | Top Score: {this.props.topScore}
                 </span>
             </nav>
         )
