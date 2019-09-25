@@ -14,4 +14,4 @@ Upon mounting, App.js shuffles cards and renders them as CardList components on 
 The scoreboard data is passed to the Header component as props, which is then rendered for the user. A componentDidUpdate function is called on the Header component so that it updates when the state on the parent component changes.
 
 ## Functionality
-![Screenshot of Game](./public/assets/images/screencast.gif)
+![Screenshot of Game](./public/assets/images/ClickyGame.gif)
