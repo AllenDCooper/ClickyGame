@@ -66,6 +66,7 @@ class App extends Component {
                 curAnswerResponse: "You guess correctly!",
                 curScore: newScore
             });
+            this.renderCards(this.state.curCardArr);
         };
     }
 
