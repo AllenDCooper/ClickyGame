@@ -1,6 +1,8 @@
 # ClickyGame
 A React.js application that allows a user to earn points by clicking on different cards, with the game ending when the same card is clicked twice.
 
+[https://allendcooper.github.io/ClickyGame/](https://allendcooper.github.io/ClickyGame/)
+
 ## Overview
 A single page React application, with the logic handled almost entirely by App.js, which stores the application data in its state including:
 * top score
